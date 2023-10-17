@@ -8,15 +8,17 @@ namespace Cainos.PixelArtTopDown_Basic
 
     public class PropsAltar : MonoBehaviour
     {
+        public chestopen chestopen;
         public List<SpriteRenderer> runes;
         public float lerpSpeed;
 
         private Color curColor;
         private Color targetColor;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void OnTriggerEnter2D(Collider2D other)
         {
             targetColor = new Color(1, 1, 1, 1);
+            chestopen.chestopener();
         }
 
         private void OnTriggerExit2D(Collider2D other)

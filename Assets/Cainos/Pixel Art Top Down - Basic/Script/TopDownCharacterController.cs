@@ -9,10 +9,14 @@ namespace Cainos.PixelArtTopDown_Basic
         public float speed;
 
         private Animator animator;
+        private GameManager gameManager;
 
         private void Start()
         {
             animator = GetComponent<Animator>();
+
+             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         }
 
 
@@ -46,5 +50,17 @@ namespace Cainos.PixelArtTopDown_Basic
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
         }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Coin")
+            {
+                gameManager.coinsCounter += 1;
+                Destroy(other.gameObject);
+                Debug.Log("Player has collected a coin!");
+            }
+        }
+
     }
 }
