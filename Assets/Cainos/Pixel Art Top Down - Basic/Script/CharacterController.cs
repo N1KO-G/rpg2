@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Cainos.PixelArtTopDown_Basic
-{
-    public class TopDownCharacterController : MonoBehaviour
+    public class CharacterController : MonoBehaviour
     {
 
-        public bool haskey = false;
+        public bool HasKey = false;
+
         public float speed;
 
         private Animator animator;
@@ -66,4 +64,4 @@ namespace Cainos.PixelArtTopDown_Basic
         }
 
     }
-}
+
