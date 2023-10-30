@@ -1,19 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-    public class CharacterController : MonoBehaviour
+public class CharacterController : MonoBehaviour
     {
-
-        public bool HasKey = false;
-
+        
+     
+     public Weapon weapon;
+    public int respawn;
+    public bool HasKey = false;
+    public float dashspeed;
+    
         public float speed;
 
         private Animator animator;
         private GameManager gameManager;
 
+        public Rigidbody2D rb;
+        
+        Vector2 movement;
+        Vector2 mousePosition;
+
+    [SerializeField] private AudioSource dashsound;
+    
+
+    public int maxhealth = 10;
+    public int health;
+
         private void Start()
         {
+
+        health = maxhealth;
             animator = GetComponent<Animator>();
 
              gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -21,8 +39,9 @@ using UnityEngine;
         }
 
 
-        private void Update()
+        public void Update()
         {
+
             Vector2 dir = Vector2.zero;
             if (Input.GetKey(KeyCode.A))
             {
@@ -50,7 +69,30 @@ using UnityEngine;
             animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            
+            rb.velocity = new Vector2(dir.x  *  speed * dashspeed, dir.y  * speed * dashspeed);
+            dashsound.Play();
+
+
         }
+
+
+    }
+
+
+    public void takedamage(int enemydamage)
+    {
+        health -= enemydamage;
+        if (health <= 0)
+        {
+            SceneManager.LoadScene(respawn);
+        }
+    }
+
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -61,7 +103,13 @@ using UnityEngine;
                 Destroy(other.gameObject);
                 Debug.Log("Player has collected a coin!");
             }
-        }
-
+        
+        
     }
+
+    
+
+
+
+}
 
