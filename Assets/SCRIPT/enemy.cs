@@ -6,6 +6,9 @@ using UnityEngine.AI;
 public class enemy : MonoBehaviour
 {
     
+   
+    NavMeshAgent agent;
+    
     public GameObject player;
     public float speed;
     public float distancebetween;
@@ -24,6 +27,9 @@ public class enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+      var agent = GetComponent<NavMeshAgent>();
+		agent.updateRotation = false;
+		agent.updateUpAxis = false;
       
 
         health = maxhealth;
@@ -35,6 +41,7 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
