@@ -12,6 +12,7 @@ public class shooting : MonoBehaviour
     public float timebetweenfiring;
     public Transform weapon;
     public GameObject bullet;
+    public bool upgrade;
 
 void Start()
 {
@@ -45,8 +46,13 @@ void Update()
         {
             shootsound.Play();
             canfire = false;
-            Instantiate(bullet, weapon.position, Quaternion.identity);
+
+            GameObject Currentbullet = Instantiate(bullet, weapon.position, Quaternion.identity);
             
+            if (upgrade)
+            {
+                Currentbullet.transform.localScale = new Vector3(0.25f,0.25f,0.25f);
+            }
         }
 }
 

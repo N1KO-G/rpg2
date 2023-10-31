@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
         void Update()
         {
-            coinText.text = coinsCounter.ToString();
+            //coinText.text = coinsCounter.ToString();
         }
     }
 

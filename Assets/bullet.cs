@@ -10,6 +10,8 @@ public class bullet : MonoBehaviour
     private Camera cam;
     private Rigidbody2D rb;
     public float force;
+    public shooting shootbang;
+    
     
     void Start()
     {
@@ -21,6 +23,7 @@ public class bullet : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
+        shootbang = FindObjectOfType<shooting>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,8 +34,14 @@ public class bullet : MonoBehaviour
         if(collision.gameObject.TryGetComponent<enemy>(out enemy enemycomponent))
         {
             enemycomponent.TakeDamage(1);
+
+            if(shootbang.upgrade == true)
+            {
+                enemycomponent.TakeDamage(5);
+            }
         }
 
             Destroy(gameObject);
+
     }
 }
