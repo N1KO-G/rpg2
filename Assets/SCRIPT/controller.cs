@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class controller : MonoBehaviour
 {
+    //setting variables for the movement etc
     public float speed = 3.0f;
     
     public int maxHealth = 5;
@@ -22,6 +23,7 @@ public class controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // getting the health
         rigidbody2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
     }
@@ -29,6 +31,7 @@ public class controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // getting the horizontal and 
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         

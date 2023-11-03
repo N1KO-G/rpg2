@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class shooting : MonoBehaviour
 {
+    // setting variables
     [SerializeField] private AudioSource shootsound;
     public bool canfire;
     private float timer;
@@ -16,12 +17,13 @@ public class shooting : MonoBehaviour
 
 void Start()
 {
+        //getting the camera
     cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 }
 
 void Update()
 {
-
+        // making the gun aim at the mouse position
     mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
     Vector3 rotation = mousePosition - transform.position;
@@ -29,7 +31,7 @@ void Update()
     float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
 
     transform.rotation = Quaternion.Euler(0, 0, rotZ);
-
+        // checking if player can fire with timer
         if(!canfire)
         {
 
@@ -41,7 +43,7 @@ void Update()
                 timer = 0;
             }
         }
-
+        // shooting on buttonclick and canfire variable true
         if (Input.GetMouseButtonDown(0) && canfire)
         {
             shootsound.Play();

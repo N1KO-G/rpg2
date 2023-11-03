@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class CharacterController : MonoBehaviour
     {
         
-     
+     // setting variables
      public Weapon weapon;
     public int respawn;
     public bool HasKey = false;
@@ -30,7 +30,7 @@ public class CharacterController : MonoBehaviour
 
         private void Start()
         {
-
+        // setting health and getting animator and gamemanager
         health = maxhealth;
             animator = GetComponent<Animator>();
 
@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour
 
         public void Update()
         {
-
+        // getting the movement and making it able to move
             Vector2 dir = Vector2.zero;
             if (Input.GetKey(KeyCode.A))
             {
@@ -64,18 +64,27 @@ public class CharacterController : MonoBehaviour
                 dir.y = -1;
                 animator.SetInteger("Direction", 0);
             }
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
 
-            dir.Normalize();
+            rb.velocity = new Vector2(dir.x * speed * dashspeed, dir.y * speed * dashspeed);
+            
+            
+
+
+            }
+
+        dir.Normalize();
             animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
 
-
+        // dash code
         if (Input.GetKeyDown(KeyCode.Q))
         {
             
-            rb.velocity = new Vector2(dir.x  *  speed * dashspeed, dir.y  * speed * dashspeed);
-            dashsound.Play();
+            rb.velocity = new Vector2( dir.x  * speed * dashspeed, dir.y * speed * dashspeed);
+            
 
 
         }
@@ -83,7 +92,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
-
+    // taking damage from enemy
     public void takedamage(int enemydamage)
     {
         health -= enemydamage;
@@ -94,7 +103,7 @@ public class CharacterController : MonoBehaviour
     }
 
 
-
+    // collect coin when you enter
     private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.tag == "Coin")

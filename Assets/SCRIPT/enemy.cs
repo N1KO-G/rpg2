@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class enemy : MonoBehaviour
 {
     
-   
+   // setting navmesh agent and all variables
     NavMeshAgent agent;
     
     public GameObject player;
@@ -27,6 +27,7 @@ public class enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // getting navmesh agent and also getting health and gamemanager
       var agent = GetComponent<NavMeshAgent>();
 		agent.updateRotation = false;
 		agent.updateUpAxis = false;
@@ -41,6 +42,7 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // enemy move towards player when at a certain distance
        
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = player.transform.position - transform.position;
@@ -58,6 +60,7 @@ public class enemy : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        // enemy damages player with tickdamage on a timer
         if(collision.gameObject.tag == "Player")
         {
             if (!canattack)
@@ -82,7 +85,7 @@ public class enemy : MonoBehaviour
             
         }
     }
-
+    // if health is 0 enemy dies and is destroyed
     public void TakeDamage(float damageamount)
     {
         health -= damageamount;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class weaponupgrade : MonoBehaviour
 {
+    // setting the upgrade correct
     public shooting shootbang;
 
     private void OnTriggerEnter2D(Collider2D collider)
